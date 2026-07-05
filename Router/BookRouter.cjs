@@ -10,3 +10,4 @@ router.post('/api/Books',BookController.CreateBook)
 
 // Delete book
 router.delete('/api/Books/:id',BookController.DeleteBook)
+module.exports =router

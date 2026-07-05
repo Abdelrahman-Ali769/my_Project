@@ -1,6 +1,5 @@
 const BookModel = require('../Model/BookModel.cjs')
 
-
 // Api Read All Books 
 exports.ReadBooks = async function (req, res) {
     try {
