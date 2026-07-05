@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const UserRouter =require('./Router/UserRouter.cjs')
+const BookRouter =require('./Router/BookRouter.cjs')
 const app = express()
 app.use(bodyParser.json())
 
@@ -21,6 +22,7 @@ const ConnectToDB = async () => {
 ConnectToDB()
 
 app.use('/',UserRouter)
+app.use('/',BookRouter)
 app.use(async(req,res)=>{
 res.status(404).send({
     return : req.originalUrl + 'Not found'
