@@ -1,13 +1,13 @@
-const express =require('express')
-const BookController =require('../Controllers/BookController.cjs')
-const router =express.Router()
+const express = require('express');
+const BookController = require('../Controllers/BookController.cjs');
+const authMiddleware = require('../middlewares/authMiddleware.cjs');
 
-// Read All Books
-router.get('/api/Books',BookController.ReadBooks)
+const router = express.Router();
 
-// Create Book
-router.post('/api/Books',BookController.CreateBook)
+router.get('/api/Books', authMiddleware, BookController.ReadBooks);
 
-// Delete book
-router.delete('/api/Books/:id',BookController.DeleteBook)
-module.exports =router
+router.post('/api/Books', authMiddleware, BookController.CreateBook);
+
+router.delete('/api/Books/:id', authMiddleware, BookController.DeleteBook);
+
+module.exports = router;

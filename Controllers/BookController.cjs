@@ -1,35 +1,84 @@
-const BookModel = require('../Model/BookModel.cjs')
+const BookModel = require('../Model/BookModel.cjs');
 
-// Api Read All Books 
-exports.ReadBooks = async function (req, res) {
+// ================= Read All Books =================
+exports.ReadBooks = async (req, res) => {
     try {
-        const Books = await BookModel.find()
-        res.json({ message: "All Books Are avaliable to Read ", data: Books })
+
+        if (!req.user || req.user.role !== "Admin") {
+            return res.status(403).json({
+                message: "You don't have permission to perform this action."
+            });
+        }
+
+        const books = await BookModel.find();
+
+        return res.status(200).json({
+            message: "All books retrieved successfully.",
+            data: books
+        });
+
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        return res.status(500).json({
+            message: "Server Error"
+        });
     }
-}
+};
 
-// Api Create Book 
-exports.CreateBook = async function (req, res) {
+
+// ================= Create Book =================
+exports.CreateBook = async (req, res) => {
     try {
-        const CreateBook = await BookModel.create(req.body)
-        res.json({ message: " Book Created Successfuly ", data: CreateBook })
+
+        if (!req.user || req.user.role !== "Admin") {
+            return res.status(403).json({
+                message: "You don't have permission to perform this action."
+            });
+        }
+
+        const book = await BookModel.create(req.body);
+
+        return res.status(201).json({
+            message: "Book created successfully.",
+            data: book
+        });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Server Error"
+        });
     }
-    catch (error) {
-        console.log(error)
-    }
+};
 
-}
 
-//Api delete Book By ID
-
-exports.DeleteBook = async function (req, res) {
+// ================= Delete Book =================
+exports.DeleteBook = async (req, res) => {
     try {
-        await BookModel.findByIdAndDelete(req.params.id)
-        res.json({ message: " Book Deleted Successfuly", data: [] })
+
+        if (!req.user || req.user.role !== "Admin") {
+            return res.status(403).json({
+                message: "You don't have permission to perform this action."
+            });
+        }
+
+        const deletedBook = await BookModel.findByIdAndDelete(req.params.id);
+
+        if (!deletedBook) {
+            return res.status(404).json({
+                message: "Book not found."
+            });
+        }
+
+        return res.status(200).json({
+            message: "Book deleted successfully.",
+            data: deletedBook
+        });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Server Error"
+        });
     }
-    catch (error) {
-        console.log(error)
-    }
-}
+};

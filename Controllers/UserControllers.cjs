@@ -27,7 +27,7 @@ exports.Register = async function (req, res) {
 exports.Login = async function (req, res) {
     try {
         let User = await UserModel.findOne({ phone: req.body.phone })
-        if (!User || !User.comparePassword(req.body.password)) {
+        if (!User || ! User.comparePassword(req.body.password)) {
             return res.json({
                 message: "Invalid password or phone"
             })
@@ -36,14 +36,16 @@ exports.Login = async function (req, res) {
             _id: User._id,
             name: User.name,
             email: User.email,
-            phone: User.phone
-        }, 'secret')
+            phone: User.phone,
+            role: User.role
+        }, "secret");
         return res.json({
             message: " User Register Successfuly",
             User: {
                 name: User.name,
                 email: User.email,
                 phone: User.phone,
+                role: User.role,
                 token: token
             }
         })
