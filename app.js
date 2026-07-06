@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const UserRouter =require('./Router/UserRouter.cjs')
 const BookRouter =require('./Router/BookRouter.cjs')
 const app = express()
-app.use(bodyParser.json())
+app.use(express.json())
 
 // connect to data Base 
 const Uri = "mongodb://Abdelrahman123:Abdelrahman123@ac-scpetzk-shard-00-00.qd4ijnh.mongodb.net:27017,ac-scpetzk-shard-00-01.qd4ijnh.mongodb.net:27017,ac-scpetzk-shard-00-02.qd4ijnh.mongodb.net:27017/?ssl=true&replicaSet=atlas-fxo2av-shard-0&authSource=admin&appName=Cluster0"
