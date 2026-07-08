@@ -1,9 +1,7 @@
 const BookModel = require('../Model/BookModel.cjs');
-
-// ================= Read All Books =================
+// Read All Books
 exports.ReadBooks = async (req, res) => {
     try {
-
         if (!req.user || req.user.role !== "Admin") {
             return res.status(403).json({
                 message: "You don't have permission to perform this action."
@@ -26,7 +24,7 @@ exports.ReadBooks = async (req, res) => {
 };
 
 
-// ================= Create Book =================
+// Create Book
 exports.CreateBook = async (req, res) => {
     try {
 
@@ -52,7 +50,7 @@ exports.CreateBook = async (req, res) => {
 };
 
 
-// ================= Delete Book =================
+// Delete Book
 exports.DeleteBook = async (req, res) => {
     try {
 
@@ -74,7 +72,6 @@ exports.DeleteBook = async (req, res) => {
             message: "Book deleted successfully.",
             data: deletedBook
         });
-
     } catch (error) {
         console.log(error);
         return res.status(500).json({
