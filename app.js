@@ -24,9 +24,9 @@ ConnectToDB()
 app.use('/',UserRouter)
 app.use('/',BookRouter)
 
-app.use(async(req,res)=>{
+app.use((req,res)=>{
 res.status(404).send({
-    return : req.originalUrl + 'Not found'
+    message : req.originalUrl + 'Not found'
 })
 })
 app.listen(8080 ,()=>{

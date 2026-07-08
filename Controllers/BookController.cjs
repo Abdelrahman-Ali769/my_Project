@@ -53,13 +53,11 @@ exports.CreateBook = async (req, res) => {
 // Delete Book
 exports.DeleteBook = async (req, res) => {
     try {
-
         if (!req.user || req.user.role !== "Admin") {
             return res.status(403).json({
                 message: "You don't have permission to perform this action."
             });
         }
-
         const deletedBook = await BookModel.findByIdAndDelete(req.params.id);
 
         if (!deletedBook) {
