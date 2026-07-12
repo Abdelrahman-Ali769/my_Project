@@ -1,6 +1,5 @@
 const express = require('express')
 require("dotenv").config();
-const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const UserRouter = require("./Routers/UserRouter.cjs")
 const BookRouter = require("./Routers/BookRouter.cjs")
