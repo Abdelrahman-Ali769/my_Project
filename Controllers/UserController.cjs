@@ -18,7 +18,7 @@ exports.Register = async (req, res) => {
             }
         })
     } catch (error) {
-        res.status(401).send({
+        res.status(500).send({
             message: "Server Error"
         })
         console.log(error)
@@ -39,9 +39,9 @@ exports.Login = async (req, res) => {
             email: User.email,
             phone: User.phone,
             role: User.role,
-        }, "Secret")
+        },process.env.JWT_SECRET)
         return res.json({
-            message: " User Register Successfuly",
+            message: " User Login Successfuly",
             User: {
                 name: User.name,
                 email: User.email,

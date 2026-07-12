@@ -1,13 +1,14 @@
 const express = require('express')
+require("dotenv").config();
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const UserRouter =require("./Routers/UserRouter.cjs")
-const BookRouter =require("./Routers/BookRouter.cjs")
+const UserRouter = require("./Routers/UserRouter.cjs")
+const BookRouter = require("./Routers/BookRouter.cjs")
 const app = express()
 app.use(express.json())
 
 // Connection to Database
-const Uri = "mongodb://Abdelrahman123:Abdelrahman123@ac-scpetzk-shard-00-00.qd4ijnh.mongodb.net:27017,ac-scpetzk-shard-00-01.qd4ijnh.mongodb.net:27017,ac-scpetzk-shard-00-02.qd4ijnh.mongodb.net:27017/?ssl=true&replicaSet=atlas-fxo2av-shard-0&authSource=admin&appName=Cluster0"
+const Uri = process.env.MONGO_URI
 
 const ConnectToDB = async () => {
     try {
@@ -21,13 +22,13 @@ const ConnectToDB = async () => {
 }
 ConnectToDB()
 
-app.use('/',UserRouter)
-app.use('/',BookRouter)
-app.use((req,res)=>{
-res.status(404).send({
-    message : req.originalUrl+  "Not Found"
+app.use('/', UserRouter)
+app.use('/', BookRouter)
+app.use((req, res) => {
+    res.status(404).send({
+        message: req.originalUrl + "Not Found"
+    })
 })
-})
-app.listen(8000 ,()=>{
+app.listen(8000, () => {
     console.log("Server Runing .....")
 })
