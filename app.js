@@ -9,6 +9,7 @@ app.use(express.json())
 
 // Connection to Database
 const Uri = process.env.MONGO_URI
+const PORT = process.env.MONGO_PORT
 
 const ConnectToDB = async () => {
     try {
@@ -29,6 +30,6 @@ app.use((req, res) => {
         message: req.originalUrl + "Not Found"
     })
 })
-app.listen(8000, () => {
+app.listen(PORT, () => {
     console.log("Server Runing .....")
 })
