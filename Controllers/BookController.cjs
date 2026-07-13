@@ -16,6 +16,28 @@ exports.GetAllBook = async (req, res) => {
     }
 }
 
+// Get Book By ID 
+exports.GetBook = async (req, res) => {
+    try {
+        const Book = await bookModel.findById(req.params.id)
+        if (!Book) {
+            return res.status(404).json({
+                message: "Book not found",
+                data: null
+            })
+        }
+        return res.status(200).json({
+            message: "the book retrieved successfully",
+            data: Book
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: "Server Error"
+        })
+        console.log(error)
+    }
+}
+
 exports.createBook = async (req, res) => {
     try {
         const CreateBook = await bookModel.create(req.body)
@@ -34,12 +56,12 @@ exports.createBook = async (req, res) => {
 exports.UpdateBook = async (req, res) => {
     try {
         let { name, Description, Price } = req.body
-        const UpdatedBook = await bookModel.findByIdAndUpdate(req.params.id, { name, Description, Price }, {returnDocument: "after"})
+        const UpdatedBook = await bookModel.findByIdAndUpdate(req.params.id, { name, Description, Price }, { returnDocument: "after" })
         res.status(200).json({
             message: "Book Updated Successfuly",
             data: UpdatedBook
         })
-        
+
 
     } catch (error) {
         res.send({
