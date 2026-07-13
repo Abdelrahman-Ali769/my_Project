@@ -11,10 +11,8 @@ router.get("/api/GetAllBook",AuthMiddleware,AuthAdmin,BookController.GetAllBook)
 //Api GetBook
 router.get("/api/GetBook/:id",AuthMiddleware,AuthAdmin,BookController.GetBook);
 
-
 //Api createBook
 router.post("/api/createBook", AuthMiddleware,AuthAdmin,BookController.createBook);
-
 
 //Api Update Book By Id
 router.put("/api/UpdateBook/:id",AuthMiddleware,AuthAdmin,BookController.UpdateBook);
