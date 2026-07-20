@@ -39,7 +39,7 @@ exports.Login = async (req, res) => {
             email: User.email,
             phone: User.phone,
             role: User.role,
-        },process.env.JWT_SECRET)
+        },process.env.JWT_SECRET,{expiresIn: '10m' })
         return res.json({
             message: " User Login Successfuly",
             User: {
